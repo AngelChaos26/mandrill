@@ -8,10 +8,11 @@ module Spree
     def reset_password_instructions(user, token, *args)
       @store = Spree::Store.default
       @edit_password_reset_url = spree.edit_spree_user_password_url(reset_password_token: token, host: @store.url)
+      @edit_password_reset_url += "&is_trans=#{user.isTransfer}"
       
-       merge_vars = {
+      merge_vars = {
         "FIRST_NAME" => user.first_name,
-        "USER_URL" => user.isTransfer
+        "USER_URL" =>  @edit_password_reset_url
       }
 
       body = mandrill_template("reset_user_password", merge_vars)
