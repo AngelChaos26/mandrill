@@ -10,9 +10,9 @@ module Spree
       @edit_password_reset_url = spree.edit_spree_user_password_url(reset_password_token: token, host: @store.url)
       
       if user.isTransfer.nil?
-         @edit_password_reset_url += "&is_trans=false"
+         @edit_password_reset_url += "&is_trans=0"
       else
-         @edit_password_reset_url += "&is_trans=true"
+         @edit_password_reset_url += "&is_trans=1"
       end
       
       merge_vars = {
