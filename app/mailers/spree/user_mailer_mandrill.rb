@@ -11,7 +11,7 @@ module Spree
       
        merge_vars = {
         "FIRST_NAME" => user.first_name,
-        "USER_URL" => user.first_name
+        "USER_URL" => user.isTransfer
       }
 
       body = mandrill_template("reset_user_password", merge_vars)
