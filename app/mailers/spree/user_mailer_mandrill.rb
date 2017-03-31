@@ -9,7 +9,7 @@ module Spree
       @store = Spree::Store.default
       @edit_password_reset_url = spree.edit_spree_user_password_url(reset_password_token: token, host: @store.url)
       
-      if user.isTransfer.nil? or user.isTransfer.empty?
+      if user.isTransfer.nil?
          @edit_password_reset_url += "&is_trans=false"
       else
          @edit_password_reset_url += "&is_trans=true"
