@@ -6,7 +6,13 @@ class Spree::UsersController < Spree::StoreController
   include Spree::Core::ControllerHelpers
 
   def show
-    @orders = @user.orders.complete.order('completed_at desc')
+    puts "Overriding Spree::UsersController show method"
+    
+    if @user.supplier?
+      @orders = @user.supplier_orders.complete.order('completed_at desc')
+    else
+      @orders = @user.orders.complete.order('completed_at desc')
+    end
   end
 
   def create
