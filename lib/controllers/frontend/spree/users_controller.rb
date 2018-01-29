@@ -6,10 +6,14 @@ class Spree::UsersController < Spree::StoreController
   include Spree::Core::ControllerHelpers
 
   def show
-    puts "Overriding Spree::UsersController show method"
-    
     if @user.supplier?
-      @orders = @user.supplier_orders.complete.order('completed_at desc')
+      @orders = @user.supplier_orders.complete.order('completed_at desc').paginate(:page => params[:page], :per_page => 1)
+      
+      if params[:page].present?
+        respond_to do |format|
+          format.js
+        end
+      end
     else
       @orders = @user.orders.complete.order('completed_at desc')
     end
