@@ -7,7 +7,7 @@ class Spree::UsersController < Spree::StoreController
 
   def show
     if @user.supplier?
-      @orders = @user.supplier_orders.complete.order('completed_at desc').paginate(:page => params[:page], :per_page => 1)
+      @orders = @user.supplier_orders.complete.order('completed_at desc').paginate(:page => params[:page], :per_page => 20)
       
       if params[:page].present?
         respond_to do |format|
