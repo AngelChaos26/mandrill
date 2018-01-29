@@ -1,5 +1,5 @@
 Spree::UsersController.class_eval do
-    def shows
+    def show
         if @user.supplier?
             @orders = @user.supplier_orders.complete.order('completed_at desc')
         else
